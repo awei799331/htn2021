@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 from requests import api
 # AIzaSyBqoTgyqFmFUpOn3neyDu5-1WinqTjRfmk
@@ -74,7 +75,7 @@ def find_route(api_key: str, loc_list: list):
   headers = {}
   url = f'https://maps.googleapis.com/maps/api/directions/json?key={api_key}&mode=walking&origin={loc_list[0].replace(" ", "+")}&destination={loc_list[0].replace(" ", "+")}&waypoints={"|".join(loc_list[1:-1]).replace(" ", "+")}'
   response = requests.request("GET", url, headers=headers, data=payload)
-  return response.json()
+  return url, response.json()
 
 def find_route_url(api_key: str, loc_list: list):
 
@@ -91,6 +92,21 @@ def findClosestElements(arr: list, k: int, x: int) -> list:
           right -= 1
   
   return arr[left:right + 1]
+
+def find_url(api_key, lat, lon, dist):
+  pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
+  distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
+  paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
+  return find_route(api_key, paths[0][1])
+
+
+def get_streetview(api_key, lat, lon, size="600x400"):
+  headers = {}
+  payload = {}
+  url = f'https://maps.googleapis.com/maps/api/streetview?size={size}&location={lat},{lon}&key={api_key}'
+  response = requests.request("GET", url, headers=headers, data=payload)
+
+
 
 if __name__ == "__main__":
   lat = "43.490970"

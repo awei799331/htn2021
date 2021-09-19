@@ -10,7 +10,7 @@ var navStyles = {
     background: 'white'
   },
   bmBurgerBarsHover: {
-    background: '#ffd100'
+    background: 'FFD100'
   },
   bmCrossButton: {
     height: '24px',

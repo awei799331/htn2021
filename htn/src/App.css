@@ -28,9 +28,13 @@ hr {
   color: silver;
   opacity: 0.5;
 }
+h2 {
+  font-size: 1em;
+}
 p {
   /* font-size: 2.5em; */
   color: white;
+  font-size: 12px;
 }
 ul {
   margin: 0;
@@ -103,9 +107,6 @@ tbody tr:last-of-type {
 .nav-button:hover {
   color: var(--UCLA-gold);
 }
-.nav-title {
-
-}
 
 #footer {
   width: 100%;
@@ -139,19 +140,21 @@ tbody tr:last-of-type {
 }
 .main-page {
   margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
   left: 0vw;
-  font-weight: bold;
   color: white;
   background: linear-gradient(to bottom, var(--nav-darkblue), var(--UCLA-blue));
   /* background: linear-gradient(to bottom, white); */
   /* background: linear-gradient(to bottom, var(--UCLA-darkblue), var(--UCLA-blue) 60%, white); */
 }
+.main-page.flex {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
 #title-icon {
   width: 5em;
   margin: 10px;
@@ -163,7 +166,12 @@ tbody tr:last-of-type {
   align-items: center;
 }
 #title-text {
-  font-size: 5em;
+  font-size: 2em;
+}
+#title-nav {
+  font-size: 1.5em;
+  margin: 0 0 10px 10px;
+  color: var(--UCLA-gold);
 }
 #subtitle-text {
   font-size: 1em;

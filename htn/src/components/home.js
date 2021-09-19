@@ -1,39 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { slide as Menu } from 'react-burger-menu';
-
-import { navStyles } from './styles';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import NavBar from './navbar';
 
 function Home() {
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      setLat(position.coords.latitude);
-      setLon(position.coords.longitude);
-    });
-  }, []);
 
   return (
     <div id="outer-container">
-      <Menu
-        pageWrapId={"page-wrap"}
-        outerContainerId={"outer-container"}
-        styles={navStyles}
-        isOpen={false}
-      >
-        <p>cacheXplore</p>
-        <a id="home" className="nav-button" href="/">Home</a>
-        <a id="about" className="nav-button" href="/about">About</a>
-        <a id="contact" className="nav-button" href="/contact">Contact</a>
-      </Menu>
-      <main id="page-wrap" className="main-page">
-        <h1> 
+      <NavBar />
+      <main id="page-wrap" className="main-page flex">
+        <h1 id="title-text"> 
           cacheXplore
         </h1>
-        <p>
-          {lat} {lon}
-        </p>
+        <Stack style={{margin:'5px 0'}} spacing={2} direction="row">
+          <Button variant="outlined">Log In</Button>
+          <Button variant="outlined">Register</Button>
+        </Stack>
       </main>
     </div>
   );
