@@ -105,6 +105,7 @@ def get_streetview(api_key, lat, lon, size="600x400"):
   payload = {}
   url = f'https://maps.googleapis.com/maps/api/streetview?size={size}&location={lat},{lon}&key={api_key}'
   response = requests.request("GET", url, headers=headers, data=payload)
+  return response
 
 
 
@@ -114,11 +115,13 @@ if __name__ == "__main__":
   api_key = "AIzaSyBqoTgyqFmFUpOn3neyDu5-1WinqTjRfmk"
   dist = "500"
 
-  pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
-  distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
-  paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
-  print(paths)
-  joe = find_route(api_key, paths[0][1])
+  # pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
+  # distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
+  # paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
+  # print(paths)
+  # joe = find_route(api_key, paths[0][1])
   
-  with open("joe.json", "w") as f:
-    json.dump(joe, f)
+
+
+  # with open("joe.json", "w") as f:
+    # json.dump(joe, f)
