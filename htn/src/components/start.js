@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import NavBar from './navbar';
 import { Button, TextField } from '@mui/material';
 import { withStyles } from '@mui/styles';
@@ -32,6 +33,7 @@ const CssTextField = withStyles({
 })(TextField);
 
 function Start() {
+  const history = useHistory();
   const [locStatus, setLocStatus] = useState(-1);
   const [distance, setDistance] = useState(0);
   const [lat, setLat] = useState(null);
@@ -57,7 +59,10 @@ function Start() {
         latitude: lat,
         longitude: lon
       });
-      console.log(response);
+      console.log(response.data);
+      window.localStorage.setItem('mapEmbed', response.data.path_url);
+      window.localStorage.setItem('waypointImg', response.data.img_url);
+      history.push('/route');
     } catch (e) {
       console.log(e);
     }
