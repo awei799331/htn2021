@@ -22,7 +22,7 @@ def get_route():
   run_length = data['length'] #km
   start_latitude = data['latitude']
   start_longitude = data['longitude']
-  pois = data['pois']
+  # pois = data['pois']
 
   url, joe = find_url(API_KEY, start_latitude, start_longitude, run_length)
 
