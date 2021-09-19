@@ -27,22 +27,22 @@ def get_route():
   start_longitude = data['longitude']
   # pois = data['pois']
   pois = 3
-
   max_distance_of_poi = run_length * pois
 
+  # make a route and find the embedding url for it
   url, joe = find_url(API_KEY, start_latitude, start_longitude, max_distance_of_poi, run_length)
 
   routes = joe["routes"][0]
   legs = routes["legs"]
-  leg = random.choice(legs)
-  step = random.choice(leg["steps"])
-  loc = step["end_location"]
+  legs = random.sample(legs, 3)
+  steps = [random.choice(leg["steps"]) for leg in legs]
+  loc = [e["end_location"] for e in steps]
   
-  img = get_streetview(API_KEY, loc["lat"], loc["lng"])
+  imgs = [get_streetview(API_KEY, e["lat"], e["lng"]) for e in loc]
 
   return Response(dumps({
     "path_url": url,
-    "img_url": img
+    "img_url": imgs
   }), status=200, mimetype='application/json')
 
 
