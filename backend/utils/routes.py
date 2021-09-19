@@ -58,7 +58,7 @@ def find_relevant_path(dist_mat: dict, metric_size: int, dist_over_time: bool = 
       new_path = {
         "cum_metric": cum_metric,
         "path": current_path["path"] + [unvisited_node],
-        "unvisited": [j for j in range(0, len(nodes)) if j not in current_path["path"] + [unvisited_node]]
+        "unvisited": [j for j in range(0, len(nodes)) if j not in current_path["path"] + [unvisited_node] or j == 0]
       }
       if unvisited_node == 0:
         completed_paths.append(new_path)
@@ -96,8 +96,8 @@ if __name__ == "__main__":
 
   pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
   distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
-  paths = find_relevant_path(distance_matrix, 3000)
-  print(paths[-1])
+  paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
+  print(paths)
   joe = find_route(api_key, paths[0][1])
   
   with open("joe.json", "w") as f:
