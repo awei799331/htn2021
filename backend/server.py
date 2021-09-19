@@ -27,7 +27,7 @@ def get_route():
   # pois = data['pois']
   pois = 3
 
-  max_distance_of_poi = 3000
+  max_distance_of_poi = run_length * pois
 
   url, joe = find_url(API_KEY, start_latitude, start_longitude, max_distance_of_poi, run_length)
 
