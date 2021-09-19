@@ -1,5 +1,5 @@
 :root {
-  --nav-font: Arial, Helvetica, sans-serif; 
+  --nav-font: 'Open Sans', Arial, Helvetica, sans-serif; 
   --nav-height: 8vh;
   --UCLA-gold: #FFD100;
   --UCLA-blue: #2774AE;
@@ -11,14 +11,13 @@
 }
 html {
   overflow-x: hidden;
-  background: #222233;
-  font-family: var(--nav-font);
   /* font-size: 1.2em; */
 }
 body {
   margin: 0;
   padding: 0;
   font-size: 1.2em;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif; 
 }
 a {
   color: white;
@@ -43,7 +42,6 @@ table {
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 1 em;
-  font-family: sans-serif;
   width: 30vw;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   /* margin: auto; */
@@ -92,7 +90,6 @@ tbody tr:last-of-type {
 }
 #icon {
   font-size: 1.5em;
-  font-family: var(--nav-font);
   font-weight: 700;
   color: white;
   display: flex;
@@ -101,16 +98,15 @@ tbody tr:last-of-type {
 }
 .nav-button {
   margin-left: 20px;
-  font-family: var(--nav-font);
   color: white;
 }
 .nav-button:hover {
   color: var(--UCLA-gold);
 }
-#nav-icon {
-  width: 1em;
-  margin: 5px;
+.nav-title {
+
 }
+
 #footer {
   width: 100%;
   height: var(--nav-height);
@@ -122,7 +118,6 @@ tbody tr:last-of-type {
   font-size: 0.5em;
   color: grey;
 }
-
 
 #banner {
   position: absolute;
@@ -142,13 +137,13 @@ tbody tr:last-of-type {
   position: absolute;
 
 }
-#title {
-  margin-top: var(--nav-height);
+.main-page {
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - var(--nav-height));
+  height: 100vh;
   width: 100vw;
   left: 0vw;
   font-weight: bold;

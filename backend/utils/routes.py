@@ -7,12 +7,11 @@ find_locations = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?k
 
 
 def find_pois(api_key: str, lat: str, lon: str, dist: int) -> dict:
-  payload={}
+  payload = {}
   headers = {}
   url = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key={api_key}&location={lat},{lon}&radius={dist}&rankby=prominence'
   response = requests.request("GET", url, headers=headers, data=payload)
-  print(response.text)
+  # print(response.text)
   response.json()
 
-# find_pois('jjjjjAIzaSyBqoTgyqFmFUpOn3neyDu5-1WinqTjRfmk', '43.490970', '-80.523100', 1500)
 

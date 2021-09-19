@@ -16,12 +16,12 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 @app.route('/api/get_route', methods='POST')
 def get_route():
   data = request.json
-  run_length = data['length']
+  run_length = data['length'] #km
   start_latitude = data['latitude']
   start_longitude = data['longitude']
   pois = data['pois']
 
-  max_distance_of_poi = int(math.ceil((run_length/pois) / 500) * 500)
+  max_distance_of_poi = int(math.ceil((run_length*1000/pois) / 500) * 500) #m
   found_locations = find_pois(API_KEY, start_latitude, start_longitude)
 
 

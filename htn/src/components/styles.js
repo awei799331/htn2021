@@ -7,10 +7,10 @@ var navStyles = {
     top: '36px'
   },
   bmBurgerBars: {
-    background: '#373a47'
+    background: 'white'
   },
   bmBurgerBarsHover: {
-    background: '#a90000'
+    background: '#ffd100'
   },
   bmCrossButton: {
     height: '24px',
@@ -24,13 +24,13 @@ var navStyles = {
     height: '100%'
   },
   bmMenu: {
-    background: '#373a47',
+    background: '#05004a',
     padding: '2.5em 1.5em 0',
     fontSize: '1.15em',
     overflow: 'hidden'
   },
   bmMorphShape: {
-    fill: '#373a47'
+    fill: '#05004a'
   },
   bmItemList: {
     color: '#b8b7ad',
