@@ -66,7 +66,7 @@ function Start() {
       });
       console.log(response.data);
       window.localStorage.setItem('mapEmbed', response.data.path_url);
-      window.localStorage.setItem('waypointImg', response.data.img_url);
+      window.localStorage.setItem('waypointImgs', JSON.stringify(response.data.img_url));
       history.push('/route');
     } catch (e) {
       console.log(e);

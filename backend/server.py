@@ -34,7 +34,7 @@ def get_route():
 
   routes = joe["routes"][0]
   legs = routes["legs"]
-  legs = random.sample(legs, 3)
+  legs = random.sample(legs, min(len(legs), 3))
   steps = [random.choice(leg["steps"]) for leg in legs]
   loc = [e["end_location"] for e in steps]
   
