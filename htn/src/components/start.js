@@ -3,6 +3,7 @@ import NavBar from './navbar';
 import { Button, TextField } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const CssTextField = withStyles({
   root: {
@@ -48,8 +49,19 @@ function Start() {
     );
   };
 
-  const planRoute = () => {
-    
+  const planRoute = async () => {
+    let actualDistance = Math.abs(distance);
+    try {
+      let response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/get-route`, {
+        'run_length': actualDistance,
+        latitude: lat,
+        longitude: lon,
+        pois: 2
+      });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -80,6 +92,7 @@ function Start() {
             required
             id="outlined"
             label="Distance (km)"
+            onChange={e => setDistance(e.target.value)}
             type="number"
             defaultValue={0}
           />
@@ -104,11 +117,11 @@ function Start() {
 const MainWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  align-items: flex-start;
+  align-items: center;
   padding: 10vh 5vw;
 
   > * {
-    margin: 5px;
+    margin: 10px !important;
   }
 `;
 

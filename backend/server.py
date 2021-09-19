@@ -13,7 +13,7 @@ API_KEY = CONFIG['API_KEY']
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-@app.route('/api/get_route', methods='POST')
+@app.route('/api/get-route', methods='POST')
 def get_route():
   data = request.json
   run_length = data['length'] #km
@@ -22,7 +22,7 @@ def get_route():
   pois = data['pois']
 
   max_distance_of_poi = int(math.ceil((run_length*1000/pois) / 500) * 500) #m
-  found_locations = find_pois(API_KEY, start_latitude, start_longitude)
+  found_locations = find_pois(API_KEY, start_latitude, start_longitude, max_distance_of_poi)
 
 
 @app.route('/', methods=['GET'])
