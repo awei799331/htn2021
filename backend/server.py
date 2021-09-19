@@ -35,8 +35,8 @@ def get_route():
   img = get_streetview(API_KEY, loc["lat"], loc["lng"])
 
   return {
-    "url": url,
-    "img": img
+    "path_url": url,
+    "img_url": img
   }
 
 
