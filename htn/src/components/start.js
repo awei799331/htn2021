@@ -52,11 +52,10 @@ function Start() {
   const planRoute = async () => {
     let actualDistance = Math.abs(distance);
     try {
-      let response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/get-route`, {
-        'run_length': actualDistance,
+      let response = await axios.post(`${process.env.REACT_APP_BACKEND}/get-route`, {
+        length: actualDistance,
         latitude: lat,
-        longitude: lon,
-        pois: 2
+        longitude: lon
       });
       console.log(response);
     } catch (e) {
@@ -98,16 +97,10 @@ function Start() {
           />
           <Button 
             variant="outlined"
-            onClick={getLocation}
+            onClick={planRoute}
           >
             Plan Route
           </Button>
-          
-          <iframe
-            title='joemama'
-            src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBqoTgyqFmFUpOn3neyDu5-1WinqTjRfmk&mode=walking&origin=351+Tealby+Cres&destination=351+Tealby+Cres&waypoints=362+King+St+N|462+Albert+St"
-          >
-          </iframe>
         </MainWrapper>
       </main>
     </div>
@@ -118,7 +111,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  padding: 10vh 5vw;
+  padding: 10vh 5vw 0;
 
   > * {
     margin: 10px !important;

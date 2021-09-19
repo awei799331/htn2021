@@ -97,6 +97,8 @@ def find_url(api_key, lat, lon, dist):
   pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
   distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
   paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
+  print(distance_matrix)
+  print(paths)
   return find_route(api_key, paths[0][1])
 
 

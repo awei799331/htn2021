@@ -5,7 +5,7 @@ from requests import api
 from requests.api import get
 from dotenv import dotenv_values
 from flask import Flask, Response, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import random
 
 from utils.routes import find_url, get_streetview
@@ -14,9 +14,11 @@ CONFIG = dotenv_values('.env')
 API_KEY = CONFIG['API_KEY']
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "http://localhost"}})
+app.config['CORS_HEADERS'] = ['Content-Type', 'Authorization']
 
-@app.route('/api/get_route', methods='POST')
+@app.route('/get-route', methods=['POST'])
+@cross_origin(origin='*')
 def get_route():
   data = request.json
   run_length = data['length'] #km
@@ -34,10 +36,10 @@ def get_route():
   
   img = get_streetview(API_KEY, loc["lat"], loc["lng"])
 
-  return {
+  return Response({
     "path_url": url,
     "img_url": img
-  }
+  }, status=200, mimetype='application/json')
 
 
 @app.route('/', methods=['GET'])
