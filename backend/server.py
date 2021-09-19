@@ -25,10 +25,13 @@ def get_route():
   start_latitude = data['latitude']
   start_longitude = data['longitude']
   # pois = data['pois']
+  pois = 3
 
-  url, joe = find_url(API_KEY, start_latitude, start_longitude, run_length)
+  max_distance_of_poi = int(math.ceil((run_length*1000/pois) / 500) * 500) #m
 
-  routes = joe["routes"]
+  url, joe = find_url(API_KEY, start_latitude, start_longitude, max_distance_of_poi, run_length)
+
+  routes = joe["routes"][0]
   legs = routes["legs"]
   leg = random.choice(legs)
   step = random.choice(leg["steps"])

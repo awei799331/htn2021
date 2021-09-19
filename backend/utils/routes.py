@@ -93,10 +93,10 @@ def findClosestElements(arr: list, k: int, x: int) -> list:
   
   return arr[left:right + 1]
 
-def find_url(api_key, lat, lon, dist):
+def find_url(api_key, lat, lon, dist, run_length):
   pois = find_pois(api_key=api_key, lat=lat, lon=lon, dist=dist)
   distance_matrix = find_relevant_pois(api_key=api_key, pois=pois, lat=lat, lon=lon, dist=dist)
-  paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
+  paths = find_relevant_path(distance_matrix, run_length, greater_than_threshhold=2, top_k=5)
   return find_route(api_key, paths[0][1])
 
 
@@ -116,7 +116,6 @@ if __name__ == "__main__":
   # paths = find_relevant_path(distance_matrix, 3000, greater_than_threshhold=2, top_k=5)
   # print(paths)
   # joe = find_route(api_key, paths[0][1])
-
 
   # with open("joe.json", "w") as f:
     # json.dump(joe, f)
