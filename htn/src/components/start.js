@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import NavBar from './navbar';
 import { Button, TextField } from '@mui/material';
 import { withStyles } from '@mui/styles';
@@ -32,10 +33,12 @@ const CssTextField = withStyles({
 })(TextField);
 
 function Start() {
+  const history = useHistory();
   const [locStatus, setLocStatus] = useState(-1);
   const [distance, setDistance] = useState(0);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -50,6 +53,10 @@ function Start() {
   };
 
   const planRoute = async () => {
+    if (lat === null || lon === null) {
+      setShowError(true);
+      return;
+    }
     let actualDistance = Math.abs(distance);
     try {
       let response = await axios.post(`${process.env.REACT_APP_BACKEND}/get-route`, {
@@ -57,7 +64,10 @@ function Start() {
         latitude: lat,
         longitude: lon
       });
-      console.log(response);
+      console.log(response.data);
+      window.localStorage.setItem('mapEmbed', response.data.path_url);
+      window.localStorage.setItem('waypointImg', response.data.img_url);
+      history.push('/route');
     } catch (e) {
       console.log(e);
     }
@@ -101,6 +111,11 @@ function Start() {
           >
             Plan Route
           </Button>
+          <p>
+            {
+              showError === true ? 'Please enable location and check your distance input!' : ''
+            }
+          </p>
         </MainWrapper>
       </main>
     </div>

@@ -1,3 +1,4 @@
+from json import dumps
 import math
 
 import requests
@@ -17,11 +18,11 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost"}})
 app.config['CORS_HEADERS'] = ['Content-Type', 'Authorization']
 
-@app.route('/get-route', methods=['POST'])
+@app.route('/get-route', methods=['POST', 'OPTIONS'])
 @cross_origin(origin='*')
 def get_route():
   data = request.json
-  run_length = data['length'] #km
+  run_length = data['length'] * 1000 #km
   start_latitude = data['latitude']
   start_longitude = data['longitude']
   # pois = data['pois']
@@ -39,10 +40,10 @@ def get_route():
   
   img = get_streetview(API_KEY, loc["lat"], loc["lng"])
 
-  return Response({
+  return Response(dumps({
     "path_url": url,
     "img_url": img
-  }, status=200, mimetype='application/json')
+  }), status=200, mimetype='application/json')
 
 
 @app.route('/', methods=['GET'])

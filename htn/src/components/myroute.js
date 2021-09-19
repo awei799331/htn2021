@@ -3,7 +3,7 @@ import NavBar from './navbar';
 import styled from 'styled-components';
 
 function MyRoute() {
-  const [routeUrl, setRouteUrl] = useState('');
+  const [routeUrl, setRouteUrl] = useState(window.localStorage.getItem('mapEmbed') || null);
 
   return (
     <div id="outer-container">
