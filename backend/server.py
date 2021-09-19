@@ -5,9 +5,11 @@ import requests
 from requests import api
 from requests.api import get
 from dotenv import dotenv_values
-from flask import Flask, Response, request
+from flask import Flask, Response, request, render_template, session, redirect, flash, url_for, Markup,
 from flask_cors import CORS, cross_origin
 import random
+
+from Cachexplorer.Cachexplorer import cachexplorer
 
 from utils.routes import find_url, get_streetview
 
@@ -15,6 +17,11 @@ CONFIG = dotenv_values('.env')
 API_KEY = CONFIG['API_KEY']
 
 app = Flask(__name__)
+
+#probably have to replace relative path to crt with direct path
+conn_string = r'cockroachdb://dan:1TMINz3aSHskuiZe@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/cachexplorer?sslmode=verify-full&sslrootcert=$env:appdata\.postgresql\root.crt&options=--cluster%3Dgifted-marmot-3567'
+cachexplorer = cachexplorer(conn_string)
+
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost"}})
 app.config['CORS_HEADERS'] = ['Content-Type', 'Authorization']
 
