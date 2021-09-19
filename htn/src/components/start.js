@@ -38,6 +38,7 @@ function Start() {
   const [distance, setDistance] = useState(0);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -52,6 +53,10 @@ function Start() {
   };
 
   const planRoute = async () => {
+    if (lat === null || lon === null) {
+      setShowError(true);
+      return;
+    }
     let actualDistance = Math.abs(distance);
     try {
       let response = await axios.post(`${process.env.REACT_APP_BACKEND}/get-route`, {
@@ -106,6 +111,11 @@ function Start() {
           >
             Plan Route
           </Button>
+          <p>
+            {
+              showError === true ? 'Please enable location and check your distance input!' : ''
+            }
+          </p>
         </MainWrapper>
       </main>
     </div>

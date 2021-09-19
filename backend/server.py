@@ -22,7 +22,7 @@ app.config['CORS_HEADERS'] = ['Content-Type', 'Authorization']
 @cross_origin(origin='*')
 def get_route():
   data = request.json
-  run_length = data['length'] #km
+  run_length = data['length'] * 1000 #km
   start_latitude = data['latitude']
   start_longitude = data['longitude']
   # pois = data['pois']
