@@ -44,6 +44,7 @@ function MyRoute() {
           {
             images.map((item, index) => {
               console.log(item)
+              // https://www.npmjs.com/package/file-upload-with-preview
               return <img alt={`street view ${index}`} style={{width:'90%'}} src={item} key={index} />
             })
           }
