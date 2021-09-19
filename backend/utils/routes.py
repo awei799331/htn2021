@@ -76,6 +76,10 @@ def find_route(api_key: str, loc_list: list):
   response = requests.request("GET", url, headers=headers, data=payload)
   return response.json()
 
+def find_route_url(api_key: str, loc_list: list):
+
+  return f'https://maps.googleapis.com/maps/api/directions/json?key={api_key}&mode=walking&origin={loc_list[0].replace(" ", "+")}&destination={loc_list[0].replace(" ", "+")}&waypoints={"|".join(loc_list[1:-1]).replace(" ", "+")}'
+
 def findClosestElements(arr: list, k: int, x: int) -> list:
   left = 0
   right = len(arr) - 1
